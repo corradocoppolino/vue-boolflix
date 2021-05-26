@@ -1,25 +1,33 @@
 <template>
   
-    <main>
+    <main class="row">
 
-        <h1>Pokémon Detective Pikachu</h1>
-        <h1>Pokémon Detective Pikachu</h1>
-        <h1>Pokémon Detective Pikachu</h1>
-        <h1>Pokémon Detective Pikachu</h1>
-        <h1>Pokémon Detective Pikachu</h1>
-        <h1>Pokémon Detective Pikachu</h1>
-        <h1>Pokémon Detective Pikachu</h1>
-        <h1>Pokémon Detective Pikachu</h1>
+        <cards-film 
+        v-for="element in array"
+        :key="element.id"
+        :titolo= element.title
+        :original= element.original_title
+        :lingua= element.original_language
+        :voto= element.vote_average
+        />
 
     </main>
 
 </template>
 
 <script>
+import CardsFilm from './CardsFilm.vue'
 
 export default {
+    components: { 
+      CardsFilm 
+    },
     
     name: 'MainContent',
+
+    props: {
+        array: Array,
+    }
     
 }
 </script>
@@ -27,7 +35,6 @@ export default {
 <style lang='scss' scoped>
 
     main{
-        height: 1000px;
         background-color: grey;
         width: 100%;
     }

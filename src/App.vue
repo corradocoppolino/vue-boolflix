@@ -3,7 +3,9 @@
     
     <header-main @src="searchFilms" />
 
-    <main-content />
+    <main-content 
+    :array="films"
+    />
 
   </div>
 </template>
@@ -65,13 +67,7 @@ export default {
 
   beforeCreate() {
 
-    axios.get(this.apiURL,{
-      params:{
-        api_key: this.apiKey,
-        query: this.query,
-        language: "it-IT"
-        }
-    })
+    axios.get("https://api.themoviedb.org/3/search/movie?api_key=b6ecad6b36ae1c5ecd7e97efa9a42ecf&query=pokemon&language=it-IT")
       .then(res => {
           /* console.log(res.data.results); */
           this.films = res.data.results;

@@ -8,7 +8,7 @@
 
             <div class="search d-flex">
                 <input v-model="cerca" class="form-control" type="text" placeholder="Cerca un film...">
-                <button @click="$emit('src',cerca)" type="button" class="btn btn-danger">Primary</button>
+                <button @click="$emit('src',cerca)" type="button" class="btn btn-danger">Search</button>
             </div>
 
         </div>
