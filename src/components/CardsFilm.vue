@@ -5,7 +5,7 @@
         <div class="box-film text-center">
             <h6>{{titolo}}</h6>
             <h6>{{original}}</h6>
-            <h6>{{lingua}}</h6>
+            <flag :iso="controlloLingua(lingua)" />
             <h6>{{voto}}</h6>
         </div>
 
@@ -22,7 +22,20 @@ export default {
         titolo: String,
         original: String,
         lingua: String,
-        voto: String
+        voto: Number
+    },
+
+    methods: {
+
+        controlloLingua(str){
+            if(str === "en"){
+                str = "us"
+            }else if(str === "ja"){
+                str = "jp"
+            }
+            return str
+        }
+
     }
 
 }
@@ -35,5 +48,6 @@ export default {
     height: 200px;
     background-color: hotpink;
 }
+
 
 </style>

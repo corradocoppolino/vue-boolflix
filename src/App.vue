@@ -4,7 +4,8 @@
     <header-main @src="searchFilms" />
 
     <main-content 
-    :array="films"
+    :arrayFilm="films"
+    :arraySeries= "series"
     />
 
   </div>
@@ -28,10 +29,12 @@ export default {
   data(){
 
   return{
-    apiURL: "https://api.themoviedb.org/3/search/movie",
+    apiURLFilm: "https://api.themoviedb.org/3/search/movie",
+    apiURLTv: "https://api.themoviedb.org/3/search/tv",
     apiKey: "b6ecad6b36ae1c5ecd7e97efa9a42ecf",
-    query: "matrix",
+    query: "",
     films: [],
+    series: [],
     textFilm: ""
     }
   
@@ -39,9 +42,9 @@ export default {
 
   methods: {
 
-    callAxios(){
+    callAxiosFilms(){
 
-      axios.get(this.apiURL,{
+      axios.get(this.apiURLFilm,{
             params:{
                 api_key: this.apiKey,
                 query: this.query,
@@ -56,10 +59,28 @@ export default {
 
     },
 
+    callAxiosSeries(){
+
+      axios.get(this.apiURLTv,{
+            params:{
+                api_key: this.apiKey,
+                query: this.query,
+                language: "it-IT"
+            }
+        })
+        .then(res => {
+            /* console.log(res.data.results); */
+            this.series = res.data.results;
+            console.log(this.series)
+        })
+
+    },
+
     searchFilms(text){
 
       this.query= text;
-      this.callAxios();
+      this.callAxiosFilms();
+      this.callAxiosSeries();
     
     }
 
@@ -72,6 +93,13 @@ export default {
           /* console.log(res.data.results); */
           this.films = res.data.results;
           console.log(this.films)
+      })
+
+    axios.get("https://api.themoviedb.org/3/search/tv?api_key=b6ecad6b36ae1c5ecd7e97efa9a42ecf&query=pokemon&language=it-IT")
+      .then(res => {
+          /* console.log(res.data.results); */
+          this.series = res.data.results;
+          console.log(this.series)
       })
 
   }
